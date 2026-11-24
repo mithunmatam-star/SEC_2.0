@@ -1,0 +1,29 @@
+# Teach-Back AI — Apache configuration (XAMPP friendly)
+
+# No directory listings.
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Never serve configuration, SQL exports, logs or dotfiles.
+<FilesMatch "(^\.|\.(sql|log|ini|env|md)$)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Belt and braces: also block the folders through the rewrite engine.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(config|database)(/|$) - [F,L,NC]
+</IfModule>

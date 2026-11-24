@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teach a topic — Teach-Back AI</title>
+  <meta name="description" content="Pick a subject, topic, and AI student persona, then teach your topic and get an evidence-based evaluation.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%238b5cf6'/%3E%3Cpath d='M12 6 4 10l8 4 8-4-8-4Z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M7 12v4c0 1.3 2.2 2.4 5 2.4s5-1.1 5-2.4v-4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="dashboard.html" aria-label="Teach-Back AI dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4 3 8.5 12 13l9-4.5L12 4Z"/>
+            <path d="M6.5 10.8V15c0 1.6 2.5 2.9 5.5 2.9s5.5-1.3 5.5-2.9v-4.2"/>
+          </svg>
+        </span>
+        <span class="brand-text">Teach-Back <em>AI</em></span>
+      </a>
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="teach.html" class="active" aria-current="page">Teach</a>
+        <a href="history.html">History</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="user-chip">
+          <span class="user-avatar" data-user-initial aria-hidden="true">?</span>
+          <span data-user-name>Student</span>
+        </span>
+        <button class="nav-logout" type="button" data-logout>Log out</button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="teach-shell">
+    <div class="container">
+
+      <!-- ========== 1. SETUP ========== -->
+      <section id="setup-view" aria-labelledby="setup-title">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow">New teaching session</span>
+            <h1 id="setup-title">Teach it back</h1>
+            <p>Pick a topic, choose who you're teaching, and explain it in your own words.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn-outline" href="history.html">Past sessions</a>
+          </div>
+        </div>
+
+        <div class="setup-grid">
+          <section class="card setup-card">
+            <div id="reteach-banner" class="reteach-banner" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+              <div id="reteach-text"></div>
+            </div>
+
+            <h2>Session setup</h2>
+
+            <div id="setup-error" class="notice notice-error" hidden role="alert"></div>
+
+            <form id="setup-form" novalidate>
+              <div class="field">
+                <label for="setup-subject">Subject</label>
+                <input class="input" id="setup-subject" name="subject" type="text" maxlength="100" placeholder="e.g. Computer Science" autocomplete="off" required>
+                <p class="hint">A broad area, like Biology, Physics, or Economics.</p>
+                <p class="field-error" id="setup-subject-error" role="alert"></p>
+              </div>
+
+              <div class="field">
+                <label for="setup-topic">Topic</label>
+                <input class="input" id="setup-topic" name="topic_name" type="text" maxlength="150" placeholder="e.g. Binary search trees" autocomplete="off" required>
+                <p class="hint">One specific concept works better than a whole chapter.</p>
+                <p class="field-error" id="setup-topic-error" role="alert"></p>
+              </div>
+
+              <fieldset class="field" style="border:0;padding:0;margin:0 0 1.2rem">
+                <legend style="font-size:.85rem;font-weight:650;color:var(--text-soft);margin-bottom:.55rem">Who are you teaching?</legend>
+                <div class="persona-grid">
+                  <label class="persona-card">
+                    <input type="radio" name="persona" value="beginner" checked>
+                    <span class="persona-body">
+                      <strong>Beginner <span class="check">✓</span></strong>
+                      <small>Knows the basics, needs simple step-by-step explanations.</small>
+                    </span>
+                  </label>
+                  <label class="persona-card">
+                    <input type="radio" name="persona" value="kid">
+                    <span class="persona-body">
+                      <strong>Curious Kid <span class="check">✓</span></strong>
+                      <small>Asks very simple questions and wants everyday examples.</small>
+                    </span>
+                  </label>
+                  <label class="persona-card">
+                    <input type="radio" name="persona" value="skeptic">
+                    <span class="persona-body">
+                      <strong>Skeptic <span class="check">✓</span></strong>
+                      <small>Challenges you and asks "why is that actually true?".</small>
+                    </span>
+                  </label>
+                  <label class="persona-card">
+                    <input type="radio" name="persona" value="professor">
+                    <span class="persona-body">
+                      <strong>Professor <span class="check">✓</span></strong>
+                      <small>Probes deeper technical and conceptual details.</small>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <button class="btn btn-primary btn-block btn-lg" id="setup-submit" type="submit">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4ZM22 2 11 13"/></svg>
+                <span id="setup-submit-label">Start teaching session</span>
+              </button>
+            </form>
+          </section>
+
+          <aside class="card tips-card">
+            <h3>Make your teaching count</h3>
+            <ul class="tips-list mt-2">
+              <li>Explain in your own words — not a copied definition.</li>
+              <li>Define the key terms the first time you use them.</li>
+              <li>Give at least one concrete example or analogy.</li>
+              <li>Expect "why?" follow-ups. That's the point.</li>
+              <li>Send at least 3 teaching messages before ending.</li>
+            </ul>
+            <hr class="divider">
+            <h3>How the AI behaves</h3>
+            <p class="small muted mb-0">
+              It stays in the student role the whole time. It won't teach the topic or answer its own questions —
+              it only asks one short question per turn. A separate evaluator judges your explanation when you end.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ========== 2. CHAT ========== -->
+      <section id="chat-view" hidden aria-labelledby="chat-topic-title">
+        <div class="card chat-card">
+          <header class="chat-header">
+            <div class="chat-topic">
+              <h2 id="chat-topic-title">Teaching session</h2>
+              <div class="chat-meta">
+                <span class="badge badge-persona" id="chat-persona-badge">Beginner</span>
+                <span id="chat-subject">Subject</span>
+                <span aria-hidden="true">·</span>
+                <span id="chat-status-label">Active session</span>
+              </div>
+            </div>
+            <button class="btn btn-danger btn-sm" id="end-session" type="button">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11h14v10H5ZM8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              End &amp; evaluate
+            </button>
+          </header>
+
+          <div id="chat-error" class="chat-error" hidden></div>
+
+          <div id="chat-messages" class="chat-messages" aria-live="polite" aria-relevant="additions"></div>
+
+          <div class="typing-row" id="typing-row" hidden>
+            <div class="typing-bubble"><i></i><i></i><i></i></div>
+            <span class="typing-label" id="typing-label">AI student is thinking…</span>
+          </div>
+
+          <form class="composer" id="chat-form">
+            <div class="composer-row">
+              <textarea id="chat-input" rows="1" maxlength="2000" placeholder="Explain the topic in your own words…" aria-label="Your explanation"></textarea>
+              <button class="send-btn" id="send-btn" type="submit" aria-label="Send explanation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4ZM22 2 11 13"/></svg>
+              </button>
+            </div>
+            <div class="composer-meta">
+              <span><kbd>Enter</kbd> to send · <kbd>Shift</kbd> + <kbd>Enter</kbd> for a new line</span>
+              <span id="char-count">0 / 2000</span>
+            </div>
+          </form>
+
+          <div class="eval-overlay" id="eval-overlay" hidden>
+            <span class="spinner spinner-lg"></span>
+            <h3>Evaluating your teaching…</h3>
+            <p>Reading the full conversation for accuracy, clarity, completeness, examples, and knowledge gaps. This can take up to 30 seconds.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 3. REPORT ========== -->
+      <section id="report-view" hidden aria-labelledby="report-title">
+        <div class="report-head">
+          <div>
+            <span class="eyebrow">Evaluation report</span>
+            <h1 id="report-title">How did you teach?</h1>
+            <p class="muted" id="report-subtitle"></p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn-outline" href="dashboard.html">Dashboard</a>
+            <a class="btn btn-outline" href="history.html">History</a>
+          </div>
+        </div>
+        <div id="report-root"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Minimum-messages modal -->
+  <div class="modal-backdrop" id="end-modal" hidden>
+    <div class="modal modal-sm" role="dialog" aria-modal="true" aria-labelledby="end-modal-title">
+      <div class="modal-head">
+        <div>
+          <h2 id="end-modal-title">A little more teaching needed</h2>
+          <p>Ending needs at least 3 teaching messages.</p>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Close dialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="end-modal-text">You've sent 0 teaching messages so far. A useful evaluation needs a bit more evidence.</p>
+        <div class="notice notice-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          <span>Keep teaching to get a meaningful report, or discard this session and start fresh. Discarding deletes the conversation.</span>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" id="discard-session" type="button">Discard session</button>
+        <button class="btn btn-primary" id="continue-session" type="button">Keep teaching</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/teach.js"></script>
+</body>
+</html>

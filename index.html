@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teach-Back AI — Learn by Teaching</title>
+  <meta name="description" content="Teach-Back AI is a reverse tutor. Explain a topic to an AI student, get challenged with thoughtful questions, and receive a saved evaluation of your knowledge gaps.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%238b5cf6'/%3E%3Cpath d='M12 6 4 10l8 4 8-4-8-4Z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M7 12v4c0 1.3 2.2 2.4 5 2.4s5-1.1 5-2.4v-4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-auto-init="1">
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="Teach-Back AI home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4 3 8.5 12 13l9-4.5L12 4Z"/>
+            <path d="M6.5 10.8V15c0 1.6 2.5 2.9 5.5 2.9s5.5-1.3 5.5-2.9v-4.2"/>
+            <path d="M21 8.5V14"/>
+          </svg>
+        </span>
+        <span class="brand-text">Teach-Back <em>AI</em></span>
+      </a>
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#feynman">The method</a>
+        <a href="#features">Features</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost btn-sm" href="login.html">Log in</a>
+        <a class="btn btn-primary btn-sm" href="register.html">Get started</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="dot"></span> Reverse tutor for college students</span>
+          <h1 class="hero-title">Learn by <span class="gradient-text">teaching.</span></h1>
+          <p>
+            The AI doesn't lecture you. It sits down as a curious student, asks one short question at a time,
+            and lets your explanation expose exactly what you understand — and what you don't.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="register.html">
+              Start teaching for free
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-outline btn-lg" href="#how">See how it works</a>
+          </div>
+          <ul class="hero-points">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Four student personas
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Evidence-based scoring
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Progress you can see
+            </li>
+          </ul>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="mock-chat">
+            <div class="mock-bar">
+              <div class="mock-title">
+                <span class="user-avatar" style="width:28px;height:28px;flex-basis:28px;">A</span>
+                Biology · Photosynthesis
+                <span class="badge badge-persona">Skeptic</span>
+              </div>
+              <span class="mock-dots"><span></span><span></span><span></span></span>
+            </div>
+            <div class="mock-messages">
+              <div class="mock-bubble user">Plants use light energy to split water and make ATP and NADPH during the light reactions.</div>
+              <div class="mock-bubble ai">Okay. But why does the plant need light for that, instead of just using the sugar it already has?</div>
+              <div class="mock-bubble user">Because those reactions need a constant energy input. Sugar is the output, not the fuel for that step.</div>
+              <div class="mock-bubble ai">That helps. Where exactly does the oxygen we breathe come from?</div>
+              <div class="mock-typing"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="floating-score">
+            <div class="ring"><span>8.2</span></div>
+            <div>
+              <strong>Example gap report</strong>
+              <small>Accuracy · Clarity · Completeness · Examples</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">How it works</span>
+          <h2>Three steps to a sharper explanation</h2>
+          <p>No flashcards, no passive videos. You build understanding by producing it out loud — in text.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <span class="step-num">01</span>
+            <h3>Pick a topic and a persona</h3>
+            <p>Choose your subject and topic, then decide who you're teaching: a Beginner, a Curious Kid, a Skeptic, or a Professor.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">02</span>
+            <h3>Teach the AI student</h3>
+            <p>The AI asks one short follow-up question at a time. It never lectures you back, so every gap has to be filled by your own explanation.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">03</span>
+            <h3>Get your evaluation</h3>
+            <p>End the session to receive scores for accuracy, clarity, completeness, and examples — plus misconceptions, missing concepts, and next steps.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEYNMAN -->
+    <section class="section" id="feynman">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">The Feynman technique</span>
+          <h2>If you can't explain it simply, you don't know it yet.</h2>
+          <p class="lead">
+            Richard Feynman's learning method is deceptively simple: explain the idea in plain language,
+            notice where you get stuck, then go back and study that part.
+          </p>
+          <div class="feynman-list mt-3">
+            <div class="feynman-item">
+              <span class="marker">1</span>
+              <div>
+                <h4>Choose a concept</h4>
+                <p>Start with one specific topic instead of a whole chapter.</p>
+              </div>
+            </div>
+            <div class="feynman-item">
+              <span class="marker">2</span>
+              <div>
+                <h4>Explain it in simple language</h4>
+                <p>Write as if your listener knows nothing. No jargon shortcuts.</p>
+              </div>
+            </div>
+            <div class="feynman-item">
+              <span class="marker">3</span>
+              <div>
+                <h4>Find the gaps</h4>
+                <p>Confused questions are signals. Every one points to a weak spot.</p>
+              </div>
+            </div>
+            <div class="feynman-item">
+              <span class="marker">4</span>
+              <div>
+                <h4>Refine and re-teach</h4>
+                <p>Study the gap, then teach it again and compare your scores.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="quote-card">
+          <span class="eyebrow">Built around one idea</span>
+          <blockquote>
+            “The first principle is that you must not fool yourself — and you are the easiest person to fool.”
+          </blockquote>
+          <cite>Richard Feynman, physicist</cite>
+          <p class="muted mt-3" style="font-size:.9rem">
+            Teach-Back AI makes self-deception harder. The AI student asks the questions a real learner would,
+            and a separate evaluator judges only what you actually said.
+          </p>
+          <div class="persona-pills">
+            <span class="badge badge-persona">Beginner</span>
+            <span class="badge badge-persona">Curious Kid</span>
+            <span class="badge badge-persona">Skeptic</span>
+            <span class="badge badge-persona">Professor</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Features</span>
+          <h2>An EdTech study loop, not a chatbot</h2>
+          <p>Every conversation is saved, scored, and turned into the next thing you should study.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0"/><path d="M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>
+            </div>
+            <h3>Four distinct personas</h3>
+            <p>Switch between beginner, kid, skeptic, and professor to test the same topic at different depths.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/><path d="M12 8v4l3 2"/></svg>
+            </div>
+            <h3>Gap-first feedback</h3>
+            <p>Get specific gaps, misconceptions, missing concepts, and concrete suggestions — never empty praise.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg>
+            </div>
+            <h3>Progress dashboard</h3>
+            <p>Score trends, topic averages, strong and weak subjects, and recurring gaps in one place.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+            </div>
+            <h3>Re-teach mode</h3>
+            <p>Revisit a weak topic and see a side-by-side comparison of every criterion, old versus new.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+            </div>
+            <h3>Complete history</h3>
+            <p>Open any past conversation and its evaluation, or resume an active teaching session later.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11h14v10H5Z"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            </div>
+            <h3>Private by default</h3>
+            <p>Every session is scoped to your account. Your API key stays on the server, never in the browser.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="section">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">Why students stick with it</span>
+          <h2>Study smarter by explaining, not rereading</h2>
+          <p class="lead">Passive review feels productive. Teaching exposes the parts you only think you know.</p>
+          <a class="btn btn-primary mt-2" href="register.html">Create your free account</a>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><h4>Active recall, built in</h4><p>You can't paraphrase your way around a follow-up question.</p></div>
+          </article>
+          <article class="benefit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><h4>Know before the exam</h4><p>Find the concepts missing from your explanation while there's still time.</p></div>
+          </article>
+          <article class="benefit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><h4>Communication practice</h4><p>Build the skill of explaining technical ideas to non-experts.</p></div>
+          </article>
+          <article class="benefit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><h4>Visible improvement</h4><p>Re-teach weak topics and watch the gap close, criterion by criterion.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-sm">
+      <div class="container">
+        <div class="cta-panel">
+          <span class="eyebrow">Ready when you are</span>
+          <h2>Pick a topic. Start explaining.</h2>
+          <p>Your AI student is waiting with a question. Ten minutes of teaching will tell you more than an hour of highlighting.</p>
+          <a class="btn btn-primary btn-lg" href="register.html">Get started — it's free</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 4 3 8.5 12 13l9-4.5L12 4Z"/>
+                <path d="M6.5 10.8V15c0 1.6 2.5 2.9 5.5 2.9s5.5-1.3 5.5-2.9v-4.2"/>
+              </svg>
+            </span>
+            <span class="brand-text">Teach-Back <em>AI</em></span>
+          </a>
+          <p>A reverse tutor built on the Feynman technique. Explain it to learn it.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Study</h4>
+          <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="teach.html">New teaching session</a></li>
+            <li><a href="history.html">Session history</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Learn more</h4>
+          <ul>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#feynman">The Feynman technique</a></li>
+            <li><a href="register.html">Create an account</a></li>
+            <li><a href="login.html">Log in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Teach-Back AI. Built for learners.</span>
+        <span>AI feedback is a study aid and can be imperfect. Always verify with your course material.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+</body>
+</html>

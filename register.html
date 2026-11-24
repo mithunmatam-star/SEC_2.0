@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create your account — Teach-Back AI</title>
+  <meta name="description" content="Create a free Teach-Back AI account and start learning by teaching an AI student.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%238b5cf6'/%3E%3Cpath d='M12 6 4 10l8 4 8-4-8-4Z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M7 12v4c0 1.3 2.2 2.4 5 2.4s5-1.1 5-2.4v-4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-auth-page="1">
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="Teach-Back AI home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4 3 8.5 12 13l9-4.5L12 4Z"/>
+            <path d="M6.5 10.8V15c0 1.6 2.5 2.9 5.5 2.9s5.5-1.3 5.5-2.9v-4.2"/>
+          </svg>
+        </span>
+        <span class="brand-text">Teach-Back <em>AI</em></span>
+      </a>
+      <div class="nav-actions">
+        <a class="btn btn-ghost btn-sm" href="index.html">Back to home</a>
+        <a class="btn btn-outline btn-sm" href="login.html">Log in</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="container auth-shell">
+      <aside class="auth-aside">
+        <span class="eyebrow"><span class="dot"></span> Start in under a minute</span>
+        <h1>Your first lesson is the one you <span class="gradient-text">teach.</span></h1>
+        <p>
+          Create an account to save every conversation, track your scores over time, and re-teach
+          the topics where your explanation breaks down.
+        </p>
+        <ul class="auth-checklist">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            Choose from four AI student personas
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            Get scores for accuracy, clarity, completeness, and examples
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            See recurring gaps and re-teach weak topics
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            Your history stays private to your account
+          </li>
+        </ul>
+      </aside>
+
+      <section class="card auth-card" aria-labelledby="register-title">
+        <h2 id="register-title">Create your account</h2>
+        <p>Free, no credit card. Just pick a topic and start explaining.</p>
+
+        <div id="auth-error" class="notice notice-error" hidden role="alert"></div>
+
+        <form id="register-form" novalidate>
+          <div class="field">
+            <label for="register-name">Full name</label>
+            <input class="input" id="register-name" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Alex Rivera" required>
+            <p class="field-error" id="register-name-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="register-email">Email</label>
+            <input class="input" id="register-email" name="email" type="email" autocomplete="email" maxlength="190" placeholder="you@college.edu" required>
+            <p class="field-error" id="register-email-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="register-password">Password</label>
+            <div class="password-wrap">
+              <input class="input" id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="Between 8 and 72 characters" required>
+              <button class="toggle-password" type="button" data-toggle-password data-target="register-password" aria-label="Show password" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+              </button>
+            </div>
+            <p class="field-error" id="register-password-error" role="alert"></p>
+            <p class="hint">Minimum 8 characters. A short passphrase works well.</p>
+          </div>
+
+          <div class="field">
+            <label for="register-confirm">Confirm password</label>
+            <div class="password-wrap">
+              <input class="input" id="register-confirm" name="confirm_password" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="Repeat your password" required>
+              <button class="toggle-password" type="button" data-toggle-password data-target="register-confirm" aria-label="Show password" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+              </button>
+            </div>
+            <p class="field-error" id="register-confirm-error" role="alert"></p>
+          </div>
+
+          <button class="btn btn-primary btn-block" id="register-submit" type="submit">Create account</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

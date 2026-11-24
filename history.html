@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>History — Teach-Back AI</title>
+  <meta name="description" content="Review your past Teach-Back AI teaching sessions, conversations, evaluations, and re-teach weak topics.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%238b5cf6'/%3E%3Cpath d='M12 6 4 10l8 4 8-4-8-4Z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M7 12v4c0 1.3 2.2 2.4 5 2.4s5-1.1 5-2.4v-4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="dashboard.html" aria-label="Teach-Back AI dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4 3 8.5 12 13l9-4.5L12 4Z"/>
+            <path d="M6.5 10.8V15c0 1.6 2.5 2.9 5.5 2.9s5.5-1.3 5.5-2.9v-4.2"/>
+          </svg>
+        </span>
+        <span class="brand-text">Teach-Back <em>AI</em></span>
+      </a>
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="teach.html">Teach</a>
+        <a href="history.html" class="active" aria-current="page">History</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="user-chip">
+          <span class="user-avatar" data-user-initial aria-hidden="true">?</span>
+          <span data-user-name>Student</span>
+        </span>
+        <button class="nav-logout" type="button" data-logout>Log out</button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <span class="eyebrow">History</span>
+          <h1>Every explanation you've given</h1>
+          <p>Open a conversation, revisit its evaluation, or re-teach a weak topic.</p>
+        </div>
+        <div class="page-actions">
+          <a class="btn btn-primary" href="teach.html">Start new session</a>
+        </div>
+      </div>
+
+      <div class="history-toolbar">
+        <span class="history-count" id="history-count">Loading sessions…</span>
+        <div class="row">
+          <label class="sr-only" for="history-filter">Filter by status</label>
+          <select class="select" id="history-filter" style="width:auto;min-width:185px">
+            <option value="all">All sessions</option>
+            <option value="completed">Completed only</option>
+            <option value="active">Active only</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="history-loading">
+        <div class="skeleton" style="height:64px;margin-bottom:8px"></div>
+        <div class="skeleton" style="height:64px;margin-bottom:8px"></div>
+        <div class="skeleton" style="height:64px"></div>
+      </div>
+
+      <div id="history-error" hidden></div>
+
+      <div id="history-content" hidden>
+        <div class="table-wrap" id="history-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Topic</th>
+                <th scope="col">Persona</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Overall</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+        <div class="pagination-bar" id="history-pagination" style="display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0" hidden>
+          <button class="btn btn-outline btn-sm" id="page-prev" type="button" disabled>Previous</button>
+          <span class="small muted" id="page-info">Page 1 of 1</span>
+          <button class="btn btn-outline btn-sm" id="page-next" type="button" disabled>Next</button>
+        </div>
+        <div id="history-empty" hidden></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Session detail modal -->
+  <div class="modal-backdrop" id="history-modal" hidden>
+    <div class="modal modal-wide" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <div>
+          <h2 id="modal-title">Session</h2>
+          <p id="modal-subtitle"></p>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Close dialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="modal-loading" class="row" style="justify-content:center;padding:2.5rem 0">
+          <span class="spinner spinner-lg"></span>
+          <span class="muted">Loading session…</span>
+        </div>
+        <div id="modal-error" hidden></div>
+
+        <div id="modal-content" hidden>
+          <div class="tabs" role="tablist" aria-label="Session detail">
+            <button class="tab tab-active" id="tab-conversation" type="button" role="tab" aria-selected="true" aria-controls="conversation-panel" data-tab="conversation">Conversation</button>
+            <button class="tab" id="tab-evaluation" type="button" role="tab" aria-selected="false" aria-controls="evaluation-panel" data-tab="evaluation">Evaluation</button>
+          </div>
+
+          <div id="conversation-panel" role="tabpanel" aria-labelledby="tab-conversation">
+            <div class="modal-conversation" id="modal-conversation"></div>
+          </div>
+
+          <div id="evaluation-panel" role="tabpanel" aria-labelledby="tab-evaluation" hidden></div>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <a class="btn btn-outline" id="modal-action" href="#" hidden></a>
+        <button class="btn btn-primary" type="button" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/history.js"></script>
+</body>
+</html>

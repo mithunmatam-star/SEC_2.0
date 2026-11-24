@@ -1,0 +1,226 @@
+=₹<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard — Teach-Back AI</title>
+  <meta name="description" content="Your Teach-Back AI progress dashboard: scores, strongest and weakest topics, recurring gaps, and recent sessions.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%238b5cf6'/%3E%3Cpath d='M12 6 4 10l8 4 8-4-8-4Z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M7 12v4c0 1.3 2.2 2.4 5 2.4s5-1.1 5-2.4v-4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="dashboard.html" aria-label="Teach-Back AI dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4 3 8.5 12 13l9-4.5L12 4Z"/>
+            <path d="M6.5 10.8V15c0 1.6 2.5 2.9 5.5 2.9s5.5-1.3 5.5-2.9v-4.2"/>
+          </svg>
+        </span>
+        <span class="brand-text">Teach-Back <em>AI</em></span>
+      </a>
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a href="dashboard.html" class="active" aria-current="page">Dashboard</a>
+        <a href="teach.html">Teach</a>
+        <a href="history.html">History</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="user-chip">
+          <span class="user-avatar" data-user-initial aria-hidden="true">?</span>
+          <span data-user-name>Student</span>
+        </span>
+        <button class="nav-logout" type="button" data-logout>Log out</button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <span class="eyebrow">Dashboard</span>
+          <h1>Welcome back, <span data-user-name>there</span></h1>
+          <p>Every explanation you give makes the next one sharper.</p>
+        </div>
+        <div class="page-actions">
+          <a class="btn btn-primary" href="teach.html">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            Start new teaching session
+          </a>
+        </div>
+      </div>
+
+      <!-- Loading skeletons -->
+      <div id="dash-loading" aria-hidden="true">
+        <div class="stats-grid">
+          <div class="skeleton" style="height:148px"></div>
+          <div class="skeleton" style="height:148px"></div>
+          <div class="skeleton" style="height:148px"></div>
+          <div class="skeleton" style="height:148px"></div>
+        </div>
+        <div class="charts-grid">
+          <div class="skeleton" style="height:340px"></div>
+          <div class="skeleton" style="height:340px"></div>
+        </div>
+      </div>
+
+      <div id="dash-error" hidden></div>
+
+      <div id="dash-content" hidden>
+        <!-- STAT CARDS -->
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>
+            </div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">Total teaching sessions</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/><path d="M12 7v5l3 3"/></svg>
+            </div>
+            <div class="stat-value" id="stat-average">—</div>
+            <div class="stat-label">Average overall score</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div class="stat-value" id="stat-completed">0</div>
+            <div class="stat-label">Evaluated sessions</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+            </div>
+            <div class="stat-value" id="stat-gaps">0</div>
+            <div class="stat-label">Recurring knowledge gaps</div>
+          </article>
+        </div>
+
+        <!-- TREND + TOPIC CHART -->
+        <div class="charts-grid">
+          <article class="card chart-card">
+            <div class="card-header">
+              <div>
+                <h2>Score trend</h2>
+                <p>Overall score across your last 12 evaluated sessions</p>
+              </div>
+            </div>
+            <div id="trend-empty" hidden></div>
+            <div class="chart-wrap" id="trend-wrap">
+              <canvas id="trend-chart" aria-label="Line chart of overall scores over time" role="img"></canvas>
+            </div>
+          </article>
+
+          <article class="card chart-card">
+            <div class="card-header">
+              <div>
+                <h2>Average score per topic</h2>
+                <p>Shows up to 8 topics, highest average first</p>
+              </div>
+            </div>
+            <div id="topic-empty" hidden></div>
+            <div class="chart-wrap" id="topic-wrap">
+              <canvas id="topic-chart" aria-label="Bar chart of average scores per topic" role="img"></canvas>
+            </div>
+          </article>
+        </div>
+
+        <!-- STRENGTH CHART + LISTS -->
+        <div class="dashboard-grid-3">
+          <article class="card list-card">
+            <div class="card-header">
+              <div>
+                <h2>Topic strength</h2>
+                <p>Strong ≥ 7 · On track 6–6.9 · Weak &lt; 6</p>
+              </div>
+            </div>
+            <div id="strength-empty" hidden></div>
+            <div class="chart-wrap" id="strength-wrap" style="min-height:200px">
+              <canvas id="strength-chart" aria-label="Doughnut chart of strong, on track and weak topic counts" role="img"></canvas>
+            </div>
+          </article>
+
+          <article class="card list-card">
+            <div class="card-header">
+              <div>
+                <h2>Strongest topics</h2>
+                <p>Average 7.0 or higher</p>
+              </div>
+            </div>
+            <div class="topic-list" id="strongest-list"></div>
+            <div id="strongest-empty" hidden></div>
+          </article>
+
+          <article class="card list-card">
+            <div class="card-header">
+              <div>
+                <h2>Weakest topics</h2>
+                <p>Average below 6.0</p>
+              </div>
+            </div>
+            <div class="topic-list" id="weakest-list"></div>
+            <div id="weakest-empty" hidden></div>
+          </article>
+        </div>
+
+        <!-- RECENT + GAPS -->
+        <div class="dashboard-grid">
+          <article class="card list-card">
+            <div class="card-header">
+              <div>
+                <h2>Recent sessions</h2>
+                <p>Your latest teaching conversations</p>
+              </div>
+              <a class="btn btn-ghost btn-sm" href="history.html">View all</a>
+            </div>
+            <div id="recent-empty" hidden></div>
+            <div class="table-wrap" id="recent-table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Topic</th>
+                    <th scope="col">Persona</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">Open</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-body"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card list-card">
+            <div class="card-header">
+              <div>
+                <h2>Recurring knowledge gaps</h2>
+                <p>Gaps that appeared in two or more sessions</p>
+              </div>
+            </div>
+            <div class="gap-list" id="gaps-list"></div>
+            <div id="gaps-empty" hidden></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
